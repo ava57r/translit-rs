@@ -1,0 +1,6 @@
+[package]
+name = "translit"
+version = "0.1.0"
+authors = ["Alexander Andreev <andreevlex.as@gmail.com>"]
+
+[dependencies]
