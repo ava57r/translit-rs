@@ -7,6 +7,7 @@ Library for transliteration for cyrillic languages.
 ## Russian language
 
 1. GOST 7.79 System B, modified ISO 9:1995
+2. Passport (2013), ICAO
 
 ## Belarusian language
 

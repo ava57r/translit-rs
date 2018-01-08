@@ -1,4 +1,5 @@
 mod gost779;
+mod passport2013;
 
 use std::cmp::Ordering;
 
@@ -38,7 +39,9 @@ impl Transliterator {
             TranslitMethod::gost779b_ru => gost779::gost779b_ru(),
             TranslitMethod::gost779b_by => gost779::gost779b_by(),
             TranslitMethod::gost779b_ua => gost779::gost779b_ua(),
-            _ => unimplemented!(),
+            TranslitMethod::iternational_passport_2013_ru => {
+                passport2013::iternational_passport_2013_ru()
+            }
         };
 
         // sort by Latin string
@@ -48,6 +51,27 @@ impl Transliterator {
     }
 
     /// Creates a new `Transliterator` with special transliteration table
+    ///
+    /// Examples
+    ///
+    /// ```rust
+    ///
+    /// use translit::{TranslitMethod, Transliterator, CharsMapping};
+    /// let table: CharsMapping =
+    /// [
+    /// ("а", "a"),
+    /// ("с", "s"),
+    /// ("д", "d"),
+    /// ("ф", "f"),
+    /// ].iter()
+    ///   .cloned()
+    ///   .collect();
+    ///
+    /// let trasliterator = Transliterator::from_custom_transliteration_table(table);
+    /// let res = trasliterator.convert("фасад", false);
+    /// assert_eq!("fasad", res);
+    ///
+    /// ```
     pub fn from_custom_transliteration_table(custom_rules: CharsMapping) -> Self {
         let mut table = custom_rules;
 
@@ -110,12 +134,13 @@ mod tests {
          Толпами, стар и млад, под воспаленным прахом, \
          Под каменным дождем бежит из града вон.";
 
-    const TRANSLIT_RU: &'static str = "Vezuvij zev otkry`l — dy`m xly`nul klubom — plamya \
-                                       Shiroko razvilos`, kak boevoe znamya. \
-                                       Zemlya volnuetsya — s shatnuvshixsya kolonn \
-                                       Kumiry` padayut! Narod, gonimy`j straxom, \
-                                       Tolpami, star i mlad, pod vospalenny`m praxom, \
-                                       Pod kamenny`m dozhdem bezhit iz grada von.";
+    const TRANSLIT_GOST779B_RU: &'static str =
+        "Vezuvij zev otkry`l — dy`m xly`nul klubom — plamya \
+         Shiroko razvilos`, kak boevoe znamya. \
+         Zemlya volnuetsya — s shatnuvshixsya kolonn \
+         Kumiry` padayut! Narod, gonimy`j straxom, \
+         Tolpami, star i mlad, pod vospalenny`m praxom, \
+         Pod kamenny`m dozhdem bezhit iz grada von.";
 
     #[test]
     fn test_russian_to_latin_translit_gost779b_ru_1() {
@@ -129,7 +154,7 @@ mod tests {
     fn test_russian_to_latin_translit_gost779b_ru_2() {
         assert_eq!(
             Transliterator::new(TranslitMethod::gost779b_ru).convert(SOURCE_RU, false),
-            TRANSLIT_RU
+            TRANSLIT_GOST779B_RU
         );
     }
 
@@ -137,7 +162,7 @@ mod tests {
     fn test_fn_to_latin_gost779b_ru_1() {
         assert_eq!(
             Transliterator::new(TranslitMethod::gost779b_ru).to_latin(SOURCE_RU),
-            TRANSLIT_RU
+            TRANSLIT_GOST779B_RU
         );
     }
 
@@ -152,7 +177,7 @@ mod tests {
     #[test]
     fn test_latin_to_russian_translit_gost779b_ru_2() {
         assert_eq!(
-            Transliterator::new(TranslitMethod::gost779b_ru).convert(TRANSLIT_RU, true),
+            Transliterator::new(TranslitMethod::gost779b_ru).convert(TRANSLIT_GOST779B_RU, true),
             SOURCE_RU
         );
     }
@@ -160,8 +185,24 @@ mod tests {
     #[test]
     fn test_fn_from_latin_gost779b_ru_2() {
         assert_eq!(
-            Transliterator::new(TranslitMethod::gost779b_ru).from_latin(TRANSLIT_RU),
+            Transliterator::new(TranslitMethod::gost779b_ru).from_latin(TRANSLIT_GOST779B_RU),
             SOURCE_RU
+        );
+    }
+
+    const SOURCE_PASSPORT_2013_RU_1: &'static str = "Большое преимущество получает тот, \
+    кто достаточно рано сделал ошибки на которых можно учиться.© Уинстон Черчилль";
+
+    const TRANSLIT_PASSPORT_2013_RU_1: &'static str =
+        "Bolshoe preimushchestvo poluchaet tot, \
+         kto dostatochno rano sdelal oshibki na kotorykh mozhno uchitsia.© Uinston Cherchill";
+
+    #[test]
+    fn test_fn_to_latin_iternational_passport_2013_ru_1() {
+        assert_eq!(
+            Transliterator::new(TranslitMethod::iternational_passport_2013_ru)
+                .to_latin(SOURCE_PASSPORT_2013_RU_1),
+            TRANSLIT_PASSPORT_2013_RU_1
         );
     }
 

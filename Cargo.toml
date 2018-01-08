@@ -5,6 +5,7 @@ authors = ["Alexander Andreev <andreevlex.as@gmail.com>"]
 description = "Transliteration for cyrillic languages that uses officially approved rules."
 homepage = "https://github.com/andreevlex/translit-rs"
 repository = "https://github.com/andreevlex/translit-rs"
+documentation = "https://docs.rs/translit"
 keywords = ["transliteration", "encoding"]
 readme = "README.md"
 license = "MIT"
