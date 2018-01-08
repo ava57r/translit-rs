@@ -11,3 +11,7 @@ Library for transliteration for cyrillic languages.
 ## Belarusian language
 
 1. GOST 7.79 System B, modified ISO 9:1995
+
+## Ukrainian language
+
+1. GOST 7.79 System B, modified ISO 9:1995
