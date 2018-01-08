@@ -1,4 +1,9 @@
-pub fn gost779b_ru() -> super::CharsMapping {
+use super::CharsMapping;
+
+/// Cyrillic Russian transliteration table.
+/// implementation GOST 7.79 System B, modified ISO 9:1995.
+/// more details: http://en.wikipedia.org/wiki/ISO_9
+pub fn gost779b_ru() -> CharsMapping {
     [
         ("А", "A"),
         ("Б", "B"),
@@ -70,7 +75,10 @@ pub fn gost779b_ru() -> super::CharsMapping {
         .collect()
 }
 
-pub fn gost779b_by() -> super::CharsMapping {
+/// Cyrillic Belarusian transliteration table.
+/// implementation GOST 7.79 System B, modified ISO 9:1995.
+/// more details: http://en.wikipedia.org/wiki/ISO_9
+pub fn gost779b_by() -> CharsMapping {
     [
         ("А", "A"),
         ("Б", "B"),
@@ -141,6 +149,78 @@ pub fn gost779b_by() -> super::CharsMapping {
         .collect()
 }
 
-pub fn gost779b_ua() -> super::CharsMapping {
-    unimplemented!()
+/// Cyrillic Ukrainian transliteration table.
+/// implementation GOST 7.79 System B, modified ISO 9:1995.
+/// more details: http://en.wikipedia.org/wiki/ISO_9
+pub fn gost779b_ua() -> CharsMapping {
+    [
+        ("А", "A"),
+        ("Б", "B"),
+        ("В", "V"),
+        ("Г", "G"),
+        ("Д", "D"),
+        ("Е", "E"),
+        ("Ж", "Zh"),
+        ("З", "Z"),
+        ("И", "Y`"),
+        ("Й", "J"),
+        ("К", "K"),
+        ("Л", "L"),
+        ("М", "M"),
+        ("Н", "N"),
+        ("О", "O"),
+        ("П", "P"),
+        ("Р", "R"),
+        ("С", "S"),
+        ("Т", "T"),
+        ("У", "U"),
+        ("Ф", "F"),
+        ("Х", "X"),
+        ("Ц", "C"),
+        ("Ч", "Ch"),
+        ("Ш", "Sh"),
+        ("Щ", "Shh"),
+        ("ь", "`"),
+        ("Ю", "Yu"),
+        ("Я", "Ya"),
+        ("Ґ", "G`"),
+        ("Є", "Ye"),
+        ("І", "I"),
+        ("Ї", "Yi"),
+        ("а", "a"),
+        ("б", "b"),
+        ("в", "v"),
+        ("г", "g"),
+        ("д", "d"),
+        ("е", "e"),
+        ("ж", "zh"),
+        ("з", "z"),
+        ("и", "y`"),
+        ("й", "j"),
+        ("к", "k"),
+        ("л", "l"),
+        ("м", "m"),
+        ("н", "n"),
+        ("о", "o"),
+        ("п", "p"),
+        ("р", "r"),
+        ("с", "s"),
+        ("т", "t"),
+        ("у", "u"),
+        ("ф", "f"),
+        ("х", "x"),
+        ("ц", "c"),
+        ("ч", "ch"),
+        ("ш", "sh"),
+        ("щ", "shh"),
+        ("ю", "yu"),
+        ("я", "ya"),
+        ("ґ", "g`"),
+        ("є", "ye"),
+        ("і", "i"),
+        ("ї", "yi"),
+        ("№", "#"),
+    ].iter()
+        .cloned()
+        .collect()
 }
