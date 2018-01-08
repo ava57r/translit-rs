@@ -1,5 +1,7 @@
 mod gost779;
 
+use std::cmp::Ordering;
+
 pub type CharsMapping = Vec<(&'static str, &'static str)>;
 
 #[allow(non_camel_case_types)]
@@ -34,11 +36,12 @@ impl Transliterator {
     pub fn new(method: TranslitMethod) -> Self {
         let mut table = match method {
             TranslitMethod::gost779b_ru => gost779::gost779b_ru(),
+            TranslitMethod::gost779b_by => gost779::gost779b_by(),
             _ => unimplemented!(),
         };
 
         // sort by Latin string
-        table.sort_by(|a, b| b.1.cmp(a.1));
+        table.sort_by(|a, b| compare_len(b.1, a.1));
 
         Self { rules: table }
     }
@@ -48,7 +51,7 @@ impl Transliterator {
         let mut table = custom_rules;
 
         // sort by Latin string
-        table.sort_by(|a, b| b.1.cmp(a.1));
+        table.sort_by(|a, b| compare_len(b.1, a.1));
 
         Self { rules: table }
     }
@@ -83,10 +86,21 @@ impl Transliterator {
     }
 }
 
+fn compare_len(left: &str, right: &str) -> Ordering {
+    if left.len() == right.len() {
+        Ordering::Equal
+    } else if left.len() > right.len() {
+        Ordering::Greater
+    } else {
+        Ordering::Less
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::{TranslitMethod, Transliterator};
 
+    // Russian
     const SOURCE_RU: &'static str =
         "Везувий зев открыл — дым хлынул клубом — пламя \
          Широко развилось, как боевое знамя. \
@@ -143,11 +157,34 @@ mod tests {
     }
 
     #[test]
-    fn test_fn_from_latin_gost779b_ru12() {
+    fn test_fn_from_latin_gost779b_ru_2() {
         assert_eq!(
             Transliterator::new(TranslitMethod::gost779b_ru).from_latin(TRANSLIT_RU),
             SOURCE_RU
         );
     }
 
+    // Belarusian
+    const SOURCE_BY: &'static str =
+        "У рудога вераб'я ў сховішчы \
+         пад фатэлем ляжаць нейкія гаючыя зёлкі.";
+
+    const TRANSLIT_BY: &'static str = "U rudoha verab'ya u` sxovishchy` \
+                                       pad fate`lem lyazhac` nejkiya hayuchy`ya zyolki.";
+
+    #[test]
+    fn test_fn_to_latin_gost779b_by_1() {
+        assert_eq!(
+            Transliterator::new(TranslitMethod::gost779b_by).to_latin(SOURCE_BY),
+            TRANSLIT_BY
+        );
+    }
+
+    #[test]
+    fn test_fn_from_latin_gost779b_by_1() {
+        assert_eq!(
+            Transliterator::new(TranslitMethod::gost779b_by).from_latin(TRANSLIT_BY),
+            SOURCE_BY
+        );
+    }
 }
