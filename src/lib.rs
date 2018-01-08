@@ -46,7 +46,7 @@ impl Transliterator {
     /// Creates a new `Transliterator` with special transliteration table
     pub fn from_custom_transliteration_table(custom_rules: CharsMapping) -> Self {
         let mut table = custom_rules;
-        
+
         // sort by Latin string
         table.sort_by(|a, b| b.1.cmp(a.1));
 
@@ -70,6 +70,16 @@ impl Transliterator {
         }
 
         input
+    }
+
+    /// The wrapper on the method `convert` of transliteration in the Latin alphabet
+    pub fn to_latin(&self, src: &str) -> String {
+        self.convert(src, false)
+    }
+
+    /// The wrapper on the method `convert` of transliteration from the Latin alphabet
+    pub fn from_latin(&self, src: &str) -> String {
+        self.convert(src, true)
     }
 }
 
@@ -109,6 +119,14 @@ mod tests {
     }
 
     #[test]
+    fn test_fn_to_latin_gost779b_ru_1() {
+        assert_eq!(
+            Transliterator::new(TranslitMethod::gost779b_ru).to_latin(SOURCE_RU),
+            TRANSLIT_RU
+        );
+    }
+
+    #[test]
     fn test_latin_to_russian_translit_gost779b_ru_1() {
         assert_eq!(
             Transliterator::new(TranslitMethod::gost779b_ru).convert("Terminal", true),
@@ -118,9 +136,16 @@ mod tests {
 
     #[test]
     fn test_latin_to_russian_translit_gost779b_ru_2() {
-        //println!("{}", TRANSLIT_RU);
         assert_eq!(
             Transliterator::new(TranslitMethod::gost779b_ru).convert(TRANSLIT_RU, true),
+            SOURCE_RU
+        );
+    }
+
+    #[test]
+    fn test_fn_from_latin_gost779b_ru12() {
+        assert_eq!(
+            Transliterator::new(TranslitMethod::gost779b_ru).from_latin(TRANSLIT_RU),
             SOURCE_RU
         );
     }
