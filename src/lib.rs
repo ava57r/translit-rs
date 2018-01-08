@@ -37,6 +37,7 @@ impl Transliterator {
         let mut table = match method {
             TranslitMethod::gost779b_ru => gost779::gost779b_ru(),
             TranslitMethod::gost779b_by => gost779::gost779b_by(),
+            TranslitMethod::gost779b_ua => gost779::gost779b_ua(),
             _ => unimplemented!(),
         };
 
@@ -185,6 +186,30 @@ mod tests {
         assert_eq!(
             Transliterator::new(TranslitMethod::gost779b_by).from_latin(TRANSLIT_BY),
             SOURCE_BY
+        );
+    }
+
+    // Ukrainian
+    const SOURCE_UA: &'static str =
+        "Гей, хлопці, не вспію - на ґанку \
+         ваша файна їжа знищується бурундучком.";
+
+    const TRANSLIT_UA: &'static str = "Gej, xlopci, ne vspiyu - na g`anku \
+                                       vasha fajna yizha zny`shhuyet`sya burunduchkom.";
+
+    #[test]
+    fn test_fn_to_latin_gost779b_ua_1() {
+        assert_eq!(
+            Transliterator::new(TranslitMethod::gost779b_ua).to_latin(SOURCE_UA),
+            TRANSLIT_UA
+        );
+    }
+
+    #[test]
+    fn test_fn_from_latin_gost779b_ua_1() {
+        assert_eq!(
+            Transliterator::new(TranslitMethod::gost779b_ua).from_latin(TRANSLIT_UA),
+            SOURCE_UA
         );
     }
 }
