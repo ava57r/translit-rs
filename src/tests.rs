@@ -68,9 +68,19 @@ fn test_fn_from_latin_gost779b_ru_2() {
 const SOURCE_PASSPORT_2013_RU_1: &'static str = "Большое преимущество получает тот, \
     кто достаточно рано сделал ошибки на которых можно учиться.© Уинстон Черчилль";
 
+const SOURCE_PASSPORT_2013_RU_2: &'static str = "Ёлка наряжается - \
+                                                 Праздник приближается. \
+                                                 Новый год у ворот, \
+                                                 Ребятишек ёлка ждёт.";
+
 const TRANSLIT_PASSPORT_2013_RU_1: &'static str =
     "Bolshoe preimushchestvo poluchaet tot, \
      kto dostatochno rano sdelal oshibki na kotorykh mozhno uchitsia.© Uinston Cherchill";
+
+const TRANSLIT_PASSPORT_2013_RU_2: &'static str = "Elka nariazhaetsia - \
+                                                   Prazdnik priblizhaetsia. \
+                                                   Novyi god u vorot, \
+                                                   Rebiatishek elka zhdet.";
 
 #[test]
 fn test_fn_to_latin_iternational_passport_2013_ru_1() {
@@ -78,6 +88,15 @@ fn test_fn_to_latin_iternational_passport_2013_ru_1() {
         Transliterator::new(TranslitMethod::iternational_passport_2013_ru)
             .to_latin(SOURCE_PASSPORT_2013_RU_1),
         TRANSLIT_PASSPORT_2013_RU_1
+    );
+}
+
+#[test]
+fn test_fn_to_latin_iternational_passport_2013_ru_2() {
+    assert_eq!(
+        Transliterator::new(TranslitMethod::iternational_passport_2013_ru)
+            .to_latin(SOURCE_PASSPORT_2013_RU_2),
+        TRANSLIT_PASSPORT_2013_RU_2
     );
 }
 
