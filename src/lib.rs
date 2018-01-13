@@ -8,11 +8,24 @@ use std::cmp::Ordering;
 
 pub type CharsMapping = Vec<(&'static str, &'static str)>;
 
+/// This enum contains the available variants of transliteration
 #[allow(non_camel_case_types)]
 pub enum TranslitMethod {
+    /// Cyrillic Russian transliteration table.
+    /// implementation GOST 7.79 System B, modified ISO 9:1995.
+    /// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
     gost779b_ru,
+    // Cyrillic Belarusian transliteration table.
+    /// implementation GOST 7.79 System B, modified ISO 9:1995.
+    /// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
     gost779b_by,
+    /// Cyrillic Ukrainian transliteration table.
+    /// implementation GOST 7.79 System B, modified ISO 9:1995.
+    /// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
     gost779b_ua,
+    /// Cyrillic Russian transliteration table.
+    /// implementation Passport (2013), ICAO.
+    /// more details: [Romanization_of_Russian#After_2013](https://en.wikipedia.org/wiki/Romanization_of_Russian#After_2013)
     iternational_passport_2013_ru,
 }
 

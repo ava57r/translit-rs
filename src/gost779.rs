@@ -2,7 +2,7 @@ use super::CharsMapping;
 
 /// Cyrillic Russian transliteration table.
 /// implementation GOST 7.79 System B, modified ISO 9:1995.
-/// more details: http://en.wikipedia.org/wiki/ISO_9
+/// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
 pub fn gost779b_ru() -> CharsMapping {
     [
         ("А", "A"),
@@ -77,7 +77,7 @@ pub fn gost779b_ru() -> CharsMapping {
 
 /// Cyrillic Belarusian transliteration table.
 /// implementation GOST 7.79 System B, modified ISO 9:1995.
-/// more details: http://en.wikipedia.org/wiki/ISO_9
+/// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
 pub fn gost779b_by() -> CharsMapping {
     [
         ("А", "A"),
@@ -151,7 +151,7 @@ pub fn gost779b_by() -> CharsMapping {
 
 /// Cyrillic Ukrainian transliteration table.
 /// implementation GOST 7.79 System B, modified ISO 9:1995.
-/// more details: http://en.wikipedia.org/wiki/ISO_9
+/// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
 pub fn gost779b_ua() -> CharsMapping {
     [
         ("А", "A"),

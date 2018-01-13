@@ -2,7 +2,7 @@ use super::CharsMapping;
 
 /// Cyrillic Russian transliteration table.
 /// implementation Passport (2013), ICAO.
-/// more details: https://en.wikipedia.org/wiki/Romanization_of_Russian#After_2013
+/// more details: [Romanization_of_Russian#After_2013](https://en.wikipedia.org/wiki/Romanization_of_Russian#After_2013)
 pub fn iternational_passport_2013_ru() -> CharsMapping {
     [
         ("А", "A"),
