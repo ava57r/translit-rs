@@ -13,19 +13,26 @@ pub type CharsMapping = Vec<(&'static str, &'static str)>;
 pub enum TranslitMethod {
     /// Cyrillic Russian transliteration table.
     /// implementation GOST 7.79 System B, modified ISO 9:1995.
-    /// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
+    /// more details:
+    /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
     gost779b_ru,
     // Cyrillic Belarusian transliteration table.
     /// implementation GOST 7.79 System B, modified ISO 9:1995.
-    /// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
+    /// more details:
+    /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
     gost779b_by,
     /// Cyrillic Ukrainian transliteration table.
     /// implementation GOST 7.79 System B, modified ISO 9:1995.
-    /// more details: [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
+    /// more details:
+    /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
     gost779b_ua,
     /// Cyrillic Russian transliteration table.
     /// implementation Passport (2013), ICAO.
-    /// more details: [Romanization_of_Russian#After_2013](https://en.wikipedia.org/wiki/Romanization_of_Russian#After_2013)
+    /// more details:
+    /// [Romanization_of_Russian#After_2013](https://en.wikipedia.org/wiki/Romanization_of_Russian#After_2013)
+    ///
+    /// Attention! Transliteration from Latin alphabet to Cyrillic text not supported.
+    /// In transliteration from the Cyrillic to the Latin alphabet excludes the letter `ь`.
     iternational_passport_2013_ru,
 }
 
