@@ -6,6 +6,9 @@ mod tests;
 
 use std::cmp::Ordering;
 
+pub use gost779::*;
+pub use passport2013::*;
+
 pub type CharsMapping = Vec<(&'static str, &'static str)>;
 
 /// This enum contains the available variants of transliteration
