@@ -1,4 +1,4 @@
-use super::{TranslitMethod, Transliterator};
+use super::{FromLatin, Gost779, Language, Passport2013, ToLatin, TranslitMethod, Transliterator};
 
 // Russian
 const SOURCE_RU: &'static str =
@@ -34,6 +34,14 @@ fn test_russian_to_latin_translit_gost779b_ru_2() {
 }
 
 #[test]
+fn test_russian_to_latin_translit_gost779b_ru_3() {
+    assert_eq!(
+        Gost779::new(Language::Ru).to_latin(SOURCE_RU),
+        TRANSLIT_GOST779B_RU
+    );
+}
+
+#[test]
 fn test_fn_to_latin_gost779b_ru_1() {
     assert_eq!(
         Transliterator::new(TranslitMethod::gost779b_ru).to_latin(SOURCE_RU),
@@ -53,6 +61,14 @@ fn test_latin_to_russian_translit_gost779b_ru_1() {
 fn test_latin_to_russian_translit_gost779b_ru_2() {
     assert_eq!(
         Transliterator::new(TranslitMethod::gost779b_ru).convert(TRANSLIT_GOST779B_RU, true),
+        SOURCE_RU
+    );
+}
+
+#[test]
+fn test_latin_to_russian_translit_gost779b_ru_3() {
+    assert_eq!(
+        Gost779::new(Language::Ru).from_latin(TRANSLIT_GOST779B_RU),
         SOURCE_RU
     );
 }
@@ -100,6 +116,14 @@ fn test_fn_to_latin_iternational_passport_2013_ru_2() {
     );
 }
 
+#[test]
+fn test_fn_to_latin_iternational_passport_2013_ru_3() {
+    assert_eq!(
+        Passport2013::new().to_latin(SOURCE_PASSPORT_2013_RU_2),
+        TRANSLIT_PASSPORT_2013_RU_2
+    );
+}
+
 // Belarusian
 const SOURCE_BY: &'static str =
     "У рудога вераб'я ў сховішчы \
@@ -117,11 +141,21 @@ fn test_fn_to_latin_gost779b_by_1() {
 }
 
 #[test]
+fn test_fn_to_latin_gost779b_by_2() {
+    assert_eq!(Gost779::new(Language::By).to_latin(SOURCE_BY), TRANSLIT_BY);
+}
+
+#[test]
 fn test_fn_from_latin_gost779b_by_1() {
     assert_eq!(
         Transliterator::new(TranslitMethod::gost779b_by).from_latin(TRANSLIT_BY),
         SOURCE_BY
     );
+}
+
+#[test]
+fn test_fn_from_latin_gost779b_by_2() {
+    assert_eq!(Gost779::new(Language::By).from_latin(TRANSLIT_BY), SOURCE_BY);
 }
 
 // Ukrainian
@@ -141,9 +175,22 @@ fn test_fn_to_latin_gost779b_ua_1() {
 }
 
 #[test]
+fn test_fn_to_latin_gost779b_ua_2() {
+    assert_eq!(Gost779::new(Language::Ua).to_latin(SOURCE_UA), TRANSLIT_UA);
+}
+
+#[test]
 fn test_fn_from_latin_gost779b_ua_1() {
     assert_eq!(
         Transliterator::new(TranslitMethod::gost779b_ua).from_latin(TRANSLIT_UA),
+        SOURCE_UA
+    );
+}
+
+#[test]
+fn test_fn_from_latin_gost779b_ua_2() {
+    assert_eq!(
+        Gost779::new(Language::Ua).from_latin(TRANSLIT_UA),
         SOURCE_UA
     );
 }
