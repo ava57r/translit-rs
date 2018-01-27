@@ -3,8 +3,7 @@ extern crate translit;
 use translit::*;
 
 fn main() {
-    let v: CharsMapping = 
-    [
+    let v: CharsMapping = [
         (" ", "-"),
         (",", ""),
         (":", ""),
@@ -16,8 +15,7 @@ fn main() {
         ("Э", "E"),
         ("ы", "y"),
         ("э", "e"),
-    ]
-    .iter()
+    ].iter()
         .cloned()
         .collect();
 
@@ -25,10 +23,14 @@ fn main() {
     custom_table.retain(|&x| !x.1.contains("`"));
     custom_table.retain(|&x| !x.1.contains("#"));
     custom_table.extend(v.iter());
-    
+
     let trn = Transliterator::from_custom_transliteration_table(custom_table);
-    
-    let source = "Общие вопросы по языку, получение помощи".to_lowercase();
-    
-    assert_eq!("obshhie-voprosy-po-yazyku-poluchenie-pomoshhi", trn.to_latin(&source));
+
+    let source =
+        "Общие вопросы по языку, получение помощи".to_lowercase();
+
+    assert_eq!(
+        "obshhie-voprosy-po-yazyku-poluchenie-pomoshhi",
+        trn.to_latin(&source)
+    );
 }
