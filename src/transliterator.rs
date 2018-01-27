@@ -159,7 +159,7 @@ pub enum Language {
 }
 
 /// The wrapper on the `Transliterator::new(TranslitMethod::gost779b_*)`.
-///Check the possibility of transliteration is carried out at compile time
+/// Check the possibility of transliteration is carried out at compile time
 ///
 /// # Examples
 ///
@@ -203,7 +203,7 @@ impl FromLatin for Gost779 {
 }
 
 /// The wrapper on the `Transliterator::new(TranslitMethod::iternational_passport_2013_ru)`.
-///Check the possibility of transliteration is carried out at compile time
+/// Check the possibility of transliteration is carried out at compile time
 ///
 /// # Examples
 ///
