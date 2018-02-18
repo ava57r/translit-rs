@@ -86,7 +86,7 @@ impl Transliterator {
     ///
     /// ```rust
     ///
-    /// use translit::{TranslitMethod, Transliterator, CharsMapping};
+    /// use translit::{Transliterator, CharsMapping};
     /// let table: CharsMapping =
     /// [
     /// ("а", "a"),
@@ -128,15 +128,19 @@ impl Transliterator {
         }
 
         input
-    }
+    }    
+}
 
+impl ToLatin for Transliterator {
     /// The wrapper on the method `convert` of transliteration in the Latin alphabet
-    pub fn to_latin(&self, src: &str) -> String {
+    fn to_latin(&self, src: &str) -> String {
         self.convert(src, false)
     }
+}
 
+impl FromLatin for Transliterator {
     /// The wrapper on the method `convert` of transliteration from the Latin alphabet
-    pub fn from_latin(&self, src: &str) -> String {
+    fn from_latin(&self, src: &str) -> String {
         self.convert(src, true)
     }
 }
@@ -165,7 +169,7 @@ pub enum Language {
 ///
 /// ```rust
 ///
-/// use translit::{TranslitMethod, Gost779, ToLatin, Language};
+/// use translit::{Gost779, ToLatin, Language};
 /// // transliteration GOST 7.79 System B
 /// let trasliterator = Gost779::new(Language::Ru);
 /// let res = trasliterator.to_latin("Россия");
@@ -209,7 +213,7 @@ impl FromLatin for Gost779 {
 ///
 /// ```rust
 ///
-/// use translit::{TranslitMethod, Passport2013, ToLatin};
+/// use translit::{Passport2013, ToLatin};
 /// // transliteration Passport (2013), ICAO
 /// let trasliterator = Passport2013::new();
 /// let res = trasliterator.to_latin("Москва, Тверская улица");
