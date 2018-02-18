@@ -15,24 +15,21 @@ pub trait FromLatin {
     fn from_latin(&self, src: &str) -> String;
 }
 
+/// Support Languages
+pub enum Language {
+    Ru,
+    By,
+    Ua,
+}
+
 /// This enum contains the available variants of transliteration
 #[allow(non_camel_case_types)]
 pub enum TranslitMethod {
-    /// Cyrillic Russian transliteration table.
+    /// Cyrillic transliteration table.
     /// implementation GOST 7.79 System B, modified ISO 9:1995.
     /// more details:
     /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
-    gost779b_ru,
-    // Cyrillic Belarusian transliteration table.
-    /// implementation GOST 7.79 System B, modified ISO 9:1995.
-    /// more details:
-    /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
-    gost779b_by,
-    /// Cyrillic Ukrainian transliteration table.
-    /// implementation GOST 7.79 System B, modified ISO 9:1995.
-    /// more details:
-    /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
-    gost779b_ua,
+    gost779b(Language),
     /// Cyrillic Russian transliteration table.
     /// implementation Passport (2013), ICAO.
     /// more details:
@@ -51,9 +48,9 @@ pub enum TranslitMethod {
 ///
 /// ```rust
 ///
-/// use translit::{TranslitMethod, Transliterator};
+/// use translit::{TranslitMethod, Transliterator, Language};
 /// // transliteration GOST 7.79 System B
-/// let trasliterator = Transliterator::new(TranslitMethod::gost779b_ru);
+/// let trasliterator = Transliterator::new(TranslitMethod::gost779b(Language::Ru));
 /// let res = trasliterator.convert("Россия", false);
 /// assert_eq!("Rossiya", res);
 ///
@@ -66,9 +63,9 @@ impl Transliterator {
     /// Creates a new `Transliterator`
     pub fn new(method: TranslitMethod) -> Self {
         let mut table = match method {
-            TranslitMethod::gost779b_ru => gost779::gost779b_ru(),
-            TranslitMethod::gost779b_by => gost779::gost779b_by(),
-            TranslitMethod::gost779b_ua => gost779::gost779b_ua(),
+            TranslitMethod::gost779b(Language::Ru) => gost779::gost779b_ru(),
+            TranslitMethod::gost779b(Language::By) => gost779::gost779b_by(),
+            TranslitMethod::gost779b(Language::Ua) => gost779::gost779b_ua(),
             TranslitMethod::iternational_passport_2013_ru => {
                 passport2013::iternational_passport_2013_ru()
             }
@@ -128,7 +125,7 @@ impl Transliterator {
         }
 
         input
-    }    
+    }
 }
 
 impl ToLatin for Transliterator {
@@ -155,13 +152,6 @@ fn compare_len(left: &str, right: &str) -> Ordering {
     }
 }
 
-/// Support Languages
-pub enum Language {
-    Ru,
-    By,
-    Ua,
-}
-
 /// The wrapper on the `Transliterator::new(TranslitMethod::gost779b_*)`.
 /// Check the possibility of transliteration is carried out at compile time
 ///
@@ -182,13 +172,7 @@ pub struct Gost779 {
 
 impl Gost779 {
     pub fn new(lang: Language) -> Gost779 {
-        let method = match lang {
-            Language::Ru => TranslitMethod::gost779b_ru,
-            Language::By => TranslitMethod::gost779b_by,
-            Language::Ua => TranslitMethod::gost779b_ua,
-        };
-
-        let translit = Transliterator::new(method);
+        let translit = Transliterator::new(TranslitMethod::gost779b(lang));
 
         Gost779 { translit }
     }

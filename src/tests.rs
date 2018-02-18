@@ -20,7 +20,8 @@ const TRANSLIT_GOST779B_RU: &'static str =
 #[test]
 fn test_russian_to_latin_translit_gost779b_ru_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ru).convert("Терминал", false),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ru))
+            .convert("Терминал", false),
         "Terminal"
     );
 }
@@ -28,7 +29,7 @@ fn test_russian_to_latin_translit_gost779b_ru_1() {
 #[test]
 fn test_russian_to_latin_translit_gost779b_ru_2() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ru).convert(SOURCE_RU, false),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ru)).convert(SOURCE_RU, false),
         TRANSLIT_GOST779B_RU
     );
 }
@@ -44,7 +45,7 @@ fn test_russian_to_latin_translit_gost779b_ru_3() {
 #[test]
 fn test_fn_to_latin_gost779b_ru_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ru).to_latin(SOURCE_RU),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ru)).to_latin(SOURCE_RU),
         TRANSLIT_GOST779B_RU
     );
 }
@@ -52,7 +53,7 @@ fn test_fn_to_latin_gost779b_ru_1() {
 #[test]
 fn test_latin_to_russian_translit_gost779b_ru_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ru).convert("Terminal", true),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ru)).convert("Terminal", true),
         "Терминал"
     );
 }
@@ -60,7 +61,8 @@ fn test_latin_to_russian_translit_gost779b_ru_1() {
 #[test]
 fn test_latin_to_russian_translit_gost779b_ru_2() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ru).convert(TRANSLIT_GOST779B_RU, true),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ru))
+            .convert(TRANSLIT_GOST779B_RU, true),
         SOURCE_RU
     );
 }
@@ -76,7 +78,8 @@ fn test_latin_to_russian_translit_gost779b_ru_3() {
 #[test]
 fn test_fn_from_latin_gost779b_ru_2() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ru).from_latin(TRANSLIT_GOST779B_RU),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ru))
+            .from_latin(TRANSLIT_GOST779B_RU),
         SOURCE_RU
     );
 }
@@ -135,7 +138,7 @@ const TRANSLIT_BY: &'static str = "U rudoha verab'ya u` sxovishchy` \
 #[test]
 fn test_fn_to_latin_gost779b_by_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_by).to_latin(SOURCE_BY),
+        Transliterator::new(TranslitMethod::gost779b(Language::By)).to_latin(SOURCE_BY),
         TRANSLIT_BY
     );
 }
@@ -148,14 +151,17 @@ fn test_fn_to_latin_gost779b_by_2() {
 #[test]
 fn test_fn_from_latin_gost779b_by_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_by).from_latin(TRANSLIT_BY),
+        Transliterator::new(TranslitMethod::gost779b(Language::By)).from_latin(TRANSLIT_BY),
         SOURCE_BY
     );
 }
 
 #[test]
 fn test_fn_from_latin_gost779b_by_2() {
-    assert_eq!(Gost779::new(Language::By).from_latin(TRANSLIT_BY), SOURCE_BY);
+    assert_eq!(
+        Gost779::new(Language::By).from_latin(TRANSLIT_BY),
+        SOURCE_BY
+    );
 }
 
 // Ukrainian
@@ -169,7 +175,7 @@ const TRANSLIT_UA: &'static str = "Gej, xlopci, ne vspiyu - na g`anku \
 #[test]
 fn test_fn_to_latin_gost779b_ua_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ua).to_latin(SOURCE_UA),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ua)).to_latin(SOURCE_UA),
         TRANSLIT_UA
     );
 }
@@ -182,7 +188,7 @@ fn test_fn_to_latin_gost779b_ua_2() {
 #[test]
 fn test_fn_from_latin_gost779b_ua_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::gost779b_ua).from_latin(TRANSLIT_UA),
+        Transliterator::new(TranslitMethod::gost779b(Language::Ua)).from_latin(TRANSLIT_UA),
         SOURCE_UA
     );
 }
