@@ -104,7 +104,7 @@ const TRANSLIT_PASSPORT_2013_RU_2: &'static str = "Elka nariazhaetsia - \
 #[test]
 fn test_fn_to_latin_iternational_passport_2013_ru_1() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::iternational_passport_2013_ru)
+        Transliterator::new(TranslitMethod::iternational_passport_2013(Language::Ru))
             .to_latin(SOURCE_PASSPORT_2013_RU_1),
         TRANSLIT_PASSPORT_2013_RU_1
     );
@@ -113,7 +113,7 @@ fn test_fn_to_latin_iternational_passport_2013_ru_1() {
 #[test]
 fn test_fn_to_latin_iternational_passport_2013_ru_2() {
     assert_eq!(
-        Transliterator::new(TranslitMethod::iternational_passport_2013_ru)
+        Transliterator::new(TranslitMethod::iternational_passport_2013(Language::Ru))
             .to_latin(SOURCE_PASSPORT_2013_RU_2),
         TRANSLIT_PASSPORT_2013_RU_2
     );

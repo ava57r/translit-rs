@@ -37,7 +37,7 @@ pub enum TranslitMethod {
     ///
     /// Attention! Transliteration from Latin alphabet to Cyrillic text not supported.
     /// In transliteration from the Cyrillic to the Latin alphabet excludes the letter `ь`.
-    iternational_passport_2013_ru,
+    iternational_passport_2013(Language),
 }
 
 /// The `Transliterator` struct allows for the transliteration
@@ -66,9 +66,10 @@ impl Transliterator {
             TranslitMethod::gost779b(Language::Ru) => gost779::gost779b_ru(),
             TranslitMethod::gost779b(Language::By) => gost779::gost779b_by(),
             TranslitMethod::gost779b(Language::Ua) => gost779::gost779b_ua(),
-            TranslitMethod::iternational_passport_2013_ru => {
+            TranslitMethod::iternational_passport_2013(Language::Ru) => {
                 passport2013::iternational_passport_2013_ru()
             }
+            TranslitMethod::iternational_passport_2013(_) => unimplemented!(),
         };
 
         // sort by Latin string
@@ -190,7 +191,7 @@ impl FromLatin for Gost779 {
     }
 }
 
-/// The wrapper on the `Transliterator::new(TranslitMethod::iternational_passport_2013_ru)`.
+/// The wrapper on the `Transliterator::new(TranslitMethod::iternational_passport_2013(Language::Ru))`.
 /// Check the possibility of transliteration is carried out at compile time
 ///
 /// # Examples
@@ -210,7 +211,7 @@ pub struct Passport2013 {
 
 impl Passport2013 {
     pub fn new() -> Passport2013 {
-        let translit = Transliterator::new(TranslitMethod::iternational_passport_2013_ru);
+        let translit = Transliterator::new(TranslitMethod::iternational_passport_2013(Language::Ru));
 
         Passport2013 { translit }
     }
