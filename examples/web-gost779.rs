@@ -24,7 +24,7 @@ fn main() {
     custom_table.retain(|&x| !x.1.contains("#"));
     custom_table.extend(v.iter());
 
-    let trn = Transliterator::from_custom_transliteration_table(custom_table);
+    let trn = Transliterator::new(custom_table);
 
     let source =
         "Общие вопросы по языку, получение помощи".to_lowercase();

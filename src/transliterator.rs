@@ -22,63 +22,16 @@ pub enum Language {
     Ua,
 }
 
-/// This enum contains the available variants of transliteration
-#[allow(non_camel_case_types)]
-pub enum TranslitMethod {
-    /// Cyrillic transliteration table.
-    /// implementation GOST 7.79 System B, modified ISO 9:1995.
-    /// more details:
-    /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
-    gost779b(Language),
-    /// Cyrillic Russian transliteration table.
-    /// implementation Passport (2013), ICAO.
-    /// more details:
-    /// [Romanization_of_Russian#After_2013](https://en.wikipedia.org/wiki/Romanization_of_Russian#After_2013)
-    ///
-    /// Attention! Transliteration from Latin alphabet to Cyrillic text not supported.
-    /// In transliteration from the Cyrillic to the Latin alphabet excludes the letter `ь`.
-    iternational_passport_2013(Language),
-}
-
 /// The `Transliterator` struct allows for the transliteration
 /// of the string of characters of Cyrillic alphabet UTF-8 to Latin alphabet
 /// and back.
 ///
-/// # Examples
-///
-/// ```rust
-///
-/// use translit::{TranslitMethod, Transliterator, Language};
-/// // transliteration GOST 7.79 System B
-/// let trasliterator = Transliterator::new(TranslitMethod::gost779b(Language::Ru));
-/// let res = trasliterator.convert("Россия", false);
-/// assert_eq!("Rossiya", res);
-///
-/// ```
 pub struct Transliterator {
     rules: CharsMapping,
 }
 
 impl Transliterator {
-    /// Creates a new `Transliterator`
-    pub fn new(method: TranslitMethod) -> Self {
-        let mut table = match method {
-            TranslitMethod::gost779b(Language::Ru) => gost779::gost779b_ru(),
-            TranslitMethod::gost779b(Language::By) => gost779::gost779b_by(),
-            TranslitMethod::gost779b(Language::Ua) => gost779::gost779b_ua(),
-            TranslitMethod::iternational_passport_2013(Language::Ru) => {
-                passport2013::iternational_passport_2013_ru()
-            }
-            TranslitMethod::iternational_passport_2013(_) => unimplemented!(),
-        };
-
-        // sort by Latin string
-        table.sort_by(|a, b| compare_len(b.1, a.1));
-
-        Self { rules: table }
-    }
-
-    /// Creates a new `Transliterator` with special transliteration table
+    /// Creates a new `Transliterator` with transliteration table
     ///
     /// Examples
     ///
@@ -95,14 +48,22 @@ impl Transliterator {
     ///   .cloned()
     ///   .collect();
     ///
-    /// let trasliterator = Transliterator::from_custom_transliteration_table(table);
+    /// let trasliterator = Transliterator::new(table);
     /// let res = trasliterator.convert("фасад", false);
     /// assert_eq!("fasad", res);
     ///
     /// ```
-    pub fn from_custom_transliteration_table(custom_rules: CharsMapping) -> Self {
+    pub fn new(custom_rules: CharsMapping) -> Self {
         let mut table = custom_rules;
-
+        fn compare_len(left: &str, right: &str) -> Ordering {
+            if left.len() == right.len() {
+                Ordering::Equal
+            } else if left.len() > right.len() {
+                Ordering::Greater
+            } else {
+                Ordering::Less
+            }
+        }
         // sort by Latin string
         table.sort_by(|a, b| compare_len(b.1, a.1));
 
@@ -143,55 +104,61 @@ impl FromLatin for Transliterator {
     }
 }
 
-fn compare_len(left: &str, right: &str) -> Ordering {
-    if left.len() == right.len() {
-        Ordering::Equal
-    } else if left.len() > right.len() {
-        Ordering::Greater
-    } else {
-        Ordering::Less
-    }
-}
-
-/// The wrapper on the `Transliterator::new(TranslitMethod::gost779b_*)`.
+/// Cyrillic transliteration table.
+/// implementation GOST 7.79 System B, modified ISO 9:1995.
+/// more details:
+/// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9).
+///
 /// Check the possibility of transliteration is carried out at compile time
 ///
 /// # Examples
 ///
 /// ```rust
 ///
-/// use translit::{Gost779, ToLatin, Language};
+/// use translit::{Gost779B, ToLatin, Language};
 /// // transliteration GOST 7.79 System B
-/// let trasliterator = Gost779::new(Language::Ru);
+/// let trasliterator = Gost779B::new(Language::Ru);
 /// let res = trasliterator.to_latin("Россия");
 /// assert_eq!("Rossiya", res);
 ///
 /// ```
-pub struct Gost779 {
+pub struct Gost779B {
     translit: Transliterator,
 }
 
-impl Gost779 {
-    pub fn new(lang: Language) -> Gost779 {
-        let translit = Transliterator::new(TranslitMethod::gost779b(lang));
+impl Gost779B {
+    pub fn new(lang: Language) -> Gost779B {
+        let table = match lang {
+            Language::Ru => gost779::gost779b_ru(),
+            Language::By => gost779::gost779b_by(),
+            Language::Ua => gost779::gost779b_ua(),
+        };
 
-        Gost779 { translit }
+        let translit = Transliterator::new(table);
+
+        Gost779B { translit }
     }
 }
 
-impl ToLatin for Gost779 {
+impl ToLatin for Gost779B {
     fn to_latin(&self, src: &str) -> String {
         self.translit.to_latin(src)
     }
 }
 
-impl FromLatin for Gost779 {
+impl FromLatin for Gost779B {
     fn from_latin(&self, src: &str) -> String {
         self.translit.from_latin(src)
     }
 }
 
-/// The wrapper on the `Transliterator::new(TranslitMethod::iternational_passport_2013(Language::Ru))`.
+/// Cyrillic Russian transliteration table.
+/// implementation Passport (2013), ICAO.
+/// more details:
+/// [Romanization_of_Russian#After_2013](https://en.wikipedia.org/wiki/Romanization_of_Russian#After_2013)
+///
+/// Attention! Transliteration from Latin alphabet to Cyrillic text not supported.
+/// In transliteration from the Cyrillic to the Latin alphabet excludes the letter `ь`.
 /// Check the possibility of transliteration is carried out at compile time
 ///
 /// # Examples
@@ -211,7 +178,7 @@ pub struct Passport2013 {
 
 impl Passport2013 {
     pub fn new() -> Passport2013 {
-        let translit = Transliterator::new(TranslitMethod::iternational_passport_2013(Language::Ru));
+        let translit = Transliterator::new(passport2013::iternational_passport_2013_ru());
 
         Passport2013 { translit }
     }
