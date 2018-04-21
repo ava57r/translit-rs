@@ -1,4 +1,5 @@
 # Translit
+[![](https://img.shields.io/crates/v/translit.svg)](https://crates.io/crates/translit)
 
 Library for transliteration for cyrillic languages.
 
