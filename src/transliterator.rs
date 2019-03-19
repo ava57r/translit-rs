@@ -202,7 +202,7 @@ impl ToLatin for Passport2013 {
 ///
 /// ```rust
 ///
-/// use translit::{Bulgarian, ToLatin};
+/// use translit::{BulgarianOfficial, ToLatin};
 /// let trasliterator = BulgarianOfficial::new();
 /// let res = trasliterator.to_latin("Разни приказки");
 /// assert_eq!("Razni prikazki", res);
