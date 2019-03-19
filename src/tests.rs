@@ -1,4 +1,4 @@
-use super::{FromLatin, Gost779B, Language, Passport2013, ToLatin, Transliterator};
+use super::{FromLatin, Gost779B, Language, Passport2013, ToLatin, BulgarianOfficial};
 
 // Russian
 const SOURCE_RU: &'static str =
@@ -114,4 +114,12 @@ fn test_fn_from_latin_gost779b_ua_1() {
         Gost779B::new(Language::Ua).from_latin(TRANSLIT_UA),
         SOURCE_UA
     );
+}
+
+const SOURCE_BG: &'static str = "Всички хора се раждат свободни и равни по достойнство и права. Те са надарени с разум и съвест и следва да се отнасят помежду си в дух на братство.";
+const TRANSLIT_BG: &'static str = "Vsichki hora se razhdat svobodni i ravni po dostoynstvo i prava. Te sa nadareni s razum i savest i sledva da se otnasyat pomezhdu si v duh na bratstvo.";
+
+#[test]
+fn test_bulgarian_to_latin() {
+    assert_eq!(BulgarianOfficial::new().to_latin(SOURCE_BG), TRANSLIT_BG);
 }
