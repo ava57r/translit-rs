@@ -4,6 +4,7 @@ use std::cmp::Ordering;
 
 use gost779;
 use passport2013;
+use bulgarian;
 
 /// The contract for transliteration in the Latin alphabet
 pub trait ToLatin {
@@ -185,6 +186,41 @@ impl Passport2013 {
 }
 
 impl ToLatin for Passport2013 {
+    fn to_latin(&self, src: &str) -> String {
+        self.translit.to_latin(src)
+    }
+}
+
+/// Official system for transliterating Bulgarian
+/// 
+/// more details:
+/// [Romanization of Bulgarian #Streamlined system](https://en.wikipedia.org/wiki/Romanization_of_Bulgarian#Streamlined_System)
+///
+/// Attention: Converting back from romanized cyrillic to cyrillic is ambiguous, thus not supported
+///
+/// # Examples
+///
+/// ```rust
+///
+/// use translit::{BulgarianOfficial, ToLatin};
+/// let trasliterator = BulgarianOfficial::new();
+/// let res = trasliterator.to_latin("Разни приказки");
+/// assert_eq!("Razni prikazki", res);
+///
+/// ```
+pub struct BulgarianOfficial {
+    translit: Transliterator,
+}
+
+impl BulgarianOfficial {
+    pub fn new() -> BulgarianOfficial {
+        let translit = Transliterator::new(bulgarian::streamlined_system());
+
+        BulgarianOfficial { translit }
+    }
+}
+
+impl ToLatin for BulgarianOfficial {
     fn to_latin(&self, src: &str) -> String {
         self.translit.to_latin(src)
     }

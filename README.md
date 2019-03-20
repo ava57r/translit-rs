@@ -17,3 +17,7 @@ Library for transliteration for cyrillic languages.
 ### Ukrainian language
 
 1. GOST 7.79 System B, modified ISO 9:1995
+
+### Bulgarian language
+
+1. Official Bulgarian Streamlined System
