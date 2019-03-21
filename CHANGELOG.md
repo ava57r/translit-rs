@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.4.1 (2019-03-21)
+
+* added support official system for transliterating Bulgarian
+
 ## 0.4.0 (2018-02-03)
 
 **Breaking changes**
