@@ -21,3 +21,7 @@ Library for transliteration for cyrillic languages.
 ### Bulgarian language
 
 1. Official Bulgarian Streamlined System
+
+### Macedonian language
+
+1. Official Documents/Cadastre Digraph System
