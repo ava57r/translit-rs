@@ -1,4 +1,4 @@
-use super::{FromLatin, Gost779B, Language, Passport2013, ToLatin, BulgarianOfficial};
+use super::{FromLatin, Gost779B, Language, Passport2013, ToLatin, BulgarianOfficial,MacedonianOfficial};
 
 // Russian
 const SOURCE_RU: &'static str =
@@ -122,4 +122,13 @@ const TRANSLIT_BG: &'static str = "Vsichki hora se razhdat svobodni i ravni po d
 #[test]
 fn test_bulgarian_to_latin() {
     assert_eq!(BulgarianOfficial::new().to_latin(SOURCE_BG), TRANSLIT_BG);
+}
+
+//Macedonian
+const SOURCE_MK: &'static str = "Природата ништо не прави бесцелно. Енергијата на умот е суштината на животот.";
+const TRANSLIT_MK: &'static str = "Prirodata nishto ne pravi bescelno. Energijata na umot e sushtinata na zhivotot.";
+
+#[test]
+fn test_macedonian_to_latin() {
+    assert_eq!(MacedonianOfficial::new().to_latin(SOURCE_MK), TRANSLIT_MK);
 }

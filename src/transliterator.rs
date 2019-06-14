@@ -5,6 +5,7 @@ use std::cmp::Ordering;
 use gost779;
 use passport2013;
 use bulgarian;
+use macedonian;
 
 /// The contract for transliteration in the Latin alphabet
 pub trait ToLatin {
@@ -192,7 +193,7 @@ impl ToLatin for Passport2013 {
 }
 
 /// Official system for transliterating Bulgarian
-/// 
+///
 /// more details:
 /// [Romanization of Bulgarian #Streamlined system](https://en.wikipedia.org/wiki/Romanization_of_Bulgarian#Streamlined_System)
 ///
@@ -221,6 +222,41 @@ impl BulgarianOfficial {
 }
 
 impl ToLatin for BulgarianOfficial {
+    fn to_latin(&self, src: &str) -> String {
+        self.translit.to_latin(src)
+    }
+}
+
+/// Official system for transliterating Macedonian
+///
+/// more details:
+/// [Romanization of Macedonian #Digraph system](https://en.wikipedia.org/wiki/Romanization_of_Macedonian#Digraph_system)
+///
+/// Attention: Converting back from romanized cyrillic to cyrillic is ambiguous, thus not supported
+///
+/// # Examples
+///
+/// ```rust
+///
+/// use translit::{MacedonianOfficial, ToLatin};
+/// let trasliterator = MacedonianOfficial::new();
+/// let res = trasliterator.to_latin("Надзор");
+/// assert_eq!("Nadzor", res);
+///
+/// ```
+pub struct MacedonianOfficial {
+    translit: Transliterator,
+}
+
+impl MacedonianOfficial {
+    pub fn new() -> MacedonianOfficial {
+        let translit = Transliterator::new(macedonian::digraph_system());
+
+        MacedonianOfficial { translit }
+    }
+}
+
+impl ToLatin for MacedonianOfficial {
     fn to_latin(&self, src: &str) -> String {
         self.translit.to_latin(src)
     }
