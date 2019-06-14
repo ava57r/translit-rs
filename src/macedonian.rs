@@ -37,7 +37,7 @@ pub fn digraph_system() -> CharsMapping {
         ("Х", "H"),
         ("Ц", "C"),
         ("Ч", "Ch"),
-        ("Џ", "Dz"),
+        ("Џ", "Dj"),
         ("Ш", "Sh"),
         ("а", "a"),
         ("б", "b"),
@@ -68,7 +68,7 @@ pub fn digraph_system() -> CharsMapping {
         ("х", "h"),
         ("ц", "c"),
         ("ч", "ch"),
-        ("џ", "dz"),
+        ("џ", "dj"),
         ("ш", "sh"),
     ].iter()
         .cloned()
