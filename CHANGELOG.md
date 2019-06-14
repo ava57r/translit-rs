@@ -1,5 +1,11 @@
 # CHANGES
 
+## 0.5.0 (2019-06-14)
+
+**Breaking changes**
+
+* used Rust `edition` 2018.
+
 ## 0.4.2 (2019-06-14)
 
 * added support official system for transliterating Macedonian.

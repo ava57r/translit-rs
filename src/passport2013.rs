@@ -76,7 +76,8 @@ pub fn iternational_passport_2013_ru() -> CharsMapping {
         ("ю", "iu"),
         ("я", "ia"),
         ("№", "#"),
-    ].iter()
-        .cloned()
-        .collect()
+    ]
+    .iter()
+    .cloned()
+    .collect()
 }

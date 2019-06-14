@@ -1,21 +1,21 @@
-use super::{FromLatin, Gost779B, Language, Passport2013, ToLatin, BulgarianOfficial,MacedonianOfficial};
+use super::{
+    BulgarianOfficial, FromLatin, Gost779B, Language, MacedonianOfficial, Passport2013, ToLatin,
+};
 
 // Russian
-const SOURCE_RU: &'static str =
-    "Везувий зев открыл — дым хлынул клубом — пламя \
-     Широко развилось, как боевое знамя. \
-     Земля волнуется — с шатнувшихся колонн \
-     Кумиры падают! Народ, гонимый страхом, \
-     Толпами, стар и млад, под воспаленным прахом, \
-     Под каменным дождем бежит из града вон.";
+const SOURCE_RU: &'static str = "Везувий зев открыл — дым хлынул клубом — пламя \
+                                 Широко развилось, как боевое знамя. \
+                                 Земля волнуется — с шатнувшихся колонн \
+                                 Кумиры падают! Народ, гонимый страхом, \
+                                 Толпами, стар и млад, под воспаленным прахом, \
+                                 Под каменным дождем бежит из града вон.";
 
-const TRANSLIT_GOST779B_RU: &'static str =
-    "Vezuvij zev otkry`l — dy`m xly`nul klubom — plamya \
-     Shiroko razvilos`, kak boevoe znamya. \
-     Zemlya volnuetsya — s shatnuvshixsya kolonn \
-     Kumiry` padayut! Narod, gonimy`j straxom, \
-     Tolpami, star i mlad, pod vospalenny`m praxom, \
-     Pod kamenny`m dozhdem bezhit iz grada von.";
+const TRANSLIT_GOST779B_RU: &'static str = "Vezuvij zev otkry`l — dy`m xly`nul klubom — plamya \
+                                            Shiroko razvilos`, kak boevoe znamya. \
+                                            Zemlya volnuetsya — s shatnuvshixsya kolonn \
+                                            Kumiry` padayut! Narod, gonimy`j straxom, \
+                                            Tolpami, star i mlad, pod vospalenny`m praxom, \
+                                            Pod kamenny`m dozhdem bezhit iz grada von.";
 
 #[test]
 fn test_russian_to_latin_translit_gost779b_ru_1() {
@@ -41,8 +41,9 @@ fn test_latin_to_russian_translit_gost779b_ru_2() {
     );
 }
 
-const SOURCE_PASSPORT_2013_RU_1: &'static str = "Большое преимущество получает тот, \
-    кто достаточно рано сделал ошибки на которых можно учиться.© Уинстон Черчилль";
+const SOURCE_PASSPORT_2013_RU_1: &'static str =
+    "Большое преимущество получает тот, \
+     кто достаточно рано сделал ошибки на которых можно учиться.© Уинстон Черчилль";
 
 const SOURCE_PASSPORT_2013_RU_2: &'static str = "Ёлка наряжается - \
                                                  Праздник приближается. \
@@ -75,9 +76,8 @@ fn test_fn_to_latin_iternational_passport_2013_ru_2() {
 }
 
 // Belarusian
-const SOURCE_BY: &'static str =
-    "У рудога вераб'я ў сховішчы \
-     пад фатэлем ляжаць нейкія гаючыя зёлкі.";
+const SOURCE_BY: &'static str = "У рудога вераб'я ў сховішчы \
+                                 пад фатэлем ляжаць нейкія гаючыя зёлкі.";
 
 const TRANSLIT_BY: &'static str = "U rudoha verab'ya u` sxovishchy` \
                                    pad fate`lem lyazhac` nejkiya hayuchy`ya zyolki.";
@@ -96,9 +96,8 @@ fn test_fn_from_latin_gost779b_by_1() {
 }
 
 // Ukrainian
-const SOURCE_UA: &'static str =
-    "Гей, хлопці, не вспію - на ґанку \
-     ваша файна їжа знищується бурундучком.";
+const SOURCE_UA: &'static str = "Гей, хлопці, не вспію - на ґанку \
+                                 ваша файна їжа знищується бурундучком.";
 
 const TRANSLIT_UA: &'static str = "Gej, xlopci, ne vspiyu - na g`anku \
                                    vasha fajna yizha zny`shhuyet`sya burunduchkom.";
@@ -125,8 +124,10 @@ fn test_bulgarian_to_latin() {
 }
 
 //Macedonian
-const SOURCE_MK: &'static str = "Природата ништо не прави бесцелно. Енергијата на умот е суштината на животот.";
-const TRANSLIT_MK: &'static str = "Prirodata nishto ne pravi bescelno. Energijata na umot e sushtinata na zhivotot.";
+const SOURCE_MK: &'static str =
+    "Природата ништо не прави бесцелно. Енергијата на умот е суштината на животот.";
+const TRANSLIT_MK: &'static str =
+    "Prirodata nishto ne pravi bescelno. Energijata na umot e sushtinata na zhivotot.";
 
 #[test]
 fn test_macedonian_to_latin() {

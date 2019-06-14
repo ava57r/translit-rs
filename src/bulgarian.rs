@@ -1,7 +1,7 @@
 use super::CharsMapping;
 
 /// Official system for transliterating Bulgarian
-/// 
+///
 /// more details:
 /// [Romanization of Bulgarian #Streamlined system](https://en.wikipedia.org/wiki/Romanization_of_Bulgarian#Streamlined_System)
 ///
@@ -69,7 +69,8 @@ pub fn streamlined_system() -> CharsMapping {
         ("ю", "yu"),
         ("я", "ya"),
         ("№", "#"),
-    ].iter()
-        .cloned()
-        .collect()
+    ]
+    .iter()
+    .cloned()
+    .collect()
 }

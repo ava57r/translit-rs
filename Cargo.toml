@@ -1,6 +1,6 @@
 [package]
 name = "translit"
-version = "0.4.2"
+version = "0.5.0"
 authors = ["Alexander Andreev <andreevlex.as@gmail.com>"]
 description = "Transliteration for cyrillic languages that uses officially approved rules."
 homepage = "https://github.com/andreevlex/translit-rs"
@@ -9,6 +9,7 @@ documentation = "https://docs.rs/translit"
 keywords = ["transliteration", "encoding"]
 readme = "README.md"
 license = "MIT"
+edition = "2018"
 
 exclude = [
     "appveyor.yml",
