@@ -71,9 +71,10 @@ pub fn gost779b_ru() -> CharsMapping {
         ("ю", "yu"),
         ("я", "ya"),
         ("№", "#"),
-    ].iter()
-        .cloned()
-        .collect()
+    ]
+    .iter()
+    .cloned()
+    .collect()
 }
 
 /// Cyrillic Belarusian transliteration table.
@@ -146,9 +147,10 @@ pub fn gost779b_by() -> CharsMapping {
         ("я", "ya"),
         ("ў", "u`"),
         ("№", "#"),
-    ].iter()
-        .cloned()
-        .collect()
+    ]
+    .iter()
+    .cloned()
+    .collect()
 }
 
 /// Cyrillic Ukrainian transliteration table.
@@ -223,7 +225,8 @@ pub fn gost779b_ua() -> CharsMapping {
         ("і", "i"),
         ("ї", "yi"),
         ("№", "#"),
-    ].iter()
-        .cloned()
-        .collect()
+    ]
+    .iter()
+    .cloned()
+    .collect()
 }

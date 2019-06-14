@@ -70,7 +70,8 @@ pub fn digraph_system() -> CharsMapping {
         ("ч", "ch"),
         ("џ", "dj"),
         ("ш", "sh"),
-    ].iter()
-        .cloned()
-        .collect()
+    ]
+    .iter()
+    .cloned()
+    .collect()
 }

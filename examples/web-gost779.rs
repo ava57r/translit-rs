@@ -15,9 +15,10 @@ fn main() {
         ("Э", "E"),
         ("ы", "y"),
         ("э", "e"),
-    ].iter()
-        .cloned()
-        .collect();
+    ]
+    .iter()
+    .cloned()
+    .collect();
 
     let mut custom_table = gost779b_ru();
     custom_table.retain(|&x| !x.1.contains("`"));

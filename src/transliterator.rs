@@ -2,10 +2,10 @@ use super::CharsMapping;
 
 use std::cmp::Ordering;
 
-use gost779;
-use passport2013;
-use bulgarian;
-use macedonian;
+use crate::bulgarian;
+use crate::gost779;
+use crate::macedonian;
+use crate::passport2013;
 
 /// The contract for transliteration in the Latin alphabet
 pub trait ToLatin {
