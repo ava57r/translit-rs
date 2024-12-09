@@ -1,3 +1,5 @@
+use crate::OrderN995;
+
 use super::{
     BulgarianOfficial, FromLatin, Gost779B, Language, MacedonianOfficial, Passport2013, ToLatin,
 };
@@ -19,10 +21,7 @@ const TRANSLIT_GOST779B_RU: &'static str = "Vezuvij zev otkry`l — dy`m xly`nul
 
 #[test]
 fn test_russian_to_latin_translit_gost779b_ru_1() {
-    assert_eq!(
-        Gost779B::new(Language::Ru).to_latin("Терминал"),
-        "Terminal"
-    );
+    assert_eq!(Gost779B::new(Language::Ru).to_latin("Терминал"), "Terminal");
 }
 
 #[test]
@@ -41,8 +40,7 @@ fn test_latin_to_russian_translit_gost779b_ru_2() {
     );
 }
 
-const SOURCE_PASSPORT_2013_RU_1: &'static str =
-    "Большое преимущество получает тот, \
+const SOURCE_PASSPORT_2013_RU_1: &'static str = "Большое преимущество получает тот, \
      кто достаточно рано сделал ошибки на которых можно учиться.© Уинстон Черчилль";
 
 const SOURCE_PASSPORT_2013_RU_2: &'static str = "Ёлка наряжается - \
@@ -50,8 +48,7 @@ const SOURCE_PASSPORT_2013_RU_2: &'static str = "Ёлка наряжается -
                                                  Новый год у ворот, \
                                                  Ребятишек ёлка ждёт.";
 
-const TRANSLIT_PASSPORT_2013_RU_1: &'static str =
-    "Bolshoe preimushchestvo poluchaet tot, \
+const TRANSLIT_PASSPORT_2013_RU_1: &'static str = "Bolshoe preimushchestvo poluchaet tot, \
      kto dostatochno rano sdelal oshibki na kotorykh mozhno uchitsia.© Uinston Cherchill";
 
 const TRANSLIT_PASSPORT_2013_RU_2: &'static str = "Elka nariazhaetsia - \
@@ -113,6 +110,70 @@ fn test_fn_from_latin_gost779b_ua_1() {
         Gost779B::new(Language::Ua).from_latin(TRANSLIT_UA),
         SOURCE_UA
     );
+}
+
+#[test]
+fn check_fio_driver_license_01() {
+    let test = "КОЗЛОВСКИЙ ДАНИЛА ВАЛЕРЬЕВИЧ";
+    let expected = "KOZLOVSKII DANILA VALEREVICh";
+
+    assert_eq!(OrderN995::new().to_latin(test), expected);
+}
+
+#[test]
+fn check_fio_driver_license_02() {
+    let test = "Иванов Иван Иванович";
+    let expected = "Ivanov Ivan Ivanovich";
+
+    assert_eq!(OrderN995::new().to_latin(test), expected);
+}
+
+#[test]
+fn check_fio_driver_license_03() {
+    let test = "Щавелевев Вартан Петрович";
+    let expected = "Shchavelevev Vartan Petrovich";
+
+    assert_eq!(OrderN995::new().to_latin(test), expected);
+}
+
+#[test]
+fn check_fio_driver_license_04() {
+    let test = "Явлинский, Григорий Алексеевич";
+    let expected = "Iavlinskii, Grigorii Alekseevich";
+
+    assert_eq!(OrderN995::new().to_latin(test), expected);
+}
+
+#[test]
+fn check_fio_driver_license_05() {
+    let test = "Александр Александрович Юрлов";
+    let expected = "Aleksandr Aleksandrovich Iurlov";
+
+    assert_eq!(OrderN995::new().to_latin(test), expected);
+}
+
+#[test]
+fn check_fio_driver_license_06() {
+    let test = "Чумаков, Алексей Георгиевич";
+    let expected = "Chumakov, Aleksei Georgievich";
+
+    assert_eq!(OrderN995::new().to_latin(test), expected);
+}
+
+#[test]
+fn check_fio_driver_license_07() {
+    let test = "Леонид Михайлович Рошаль";
+    let expected = "Leonid Mikhailovich Roshal";
+
+    assert_eq!(OrderN995::new().to_latin(test), expected);
+}
+
+#[test]
+fn check_fio_upper_driver_license_03() {
+    let test = "Щавелевев Вартан Петрович";
+    let expected = "SHCHAVELEVEV VARTAN PETROVICH";
+
+    assert_eq!(OrderN995::new().to_latin(test).to_uppercase(), expected);
 }
 
 const SOURCE_BG: &'static str = "Всички хора се раждат свободни и равни по достойнство и права. Те са надарени с разум и съвест и следва да се отнасят помежду си в дух на братство.";
