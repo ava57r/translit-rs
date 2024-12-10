@@ -27,8 +27,7 @@ fn main() {
 
     let trn = Transliterator::new(custom_table);
 
-    let source =
-        "Общие вопросы по языку, получение помощи".to_lowercase();
+    let source = "Общие вопросы по языку, получение помощи".to_lowercase();
 
     assert_eq!(
         "obshhie-voprosy-po-yazyku-poluchenie-pomoshhi",

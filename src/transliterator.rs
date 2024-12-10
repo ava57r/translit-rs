@@ -5,6 +5,7 @@ use std::cmp::Ordering;
 use crate::bulgarian;
 use crate::gost779;
 use crate::macedonian;
+use crate::order_n_995;
 use crate::passport2013;
 
 /// The contract for transliteration in the Latin alphabet
@@ -187,6 +188,26 @@ impl Passport2013 {
 }
 
 impl ToLatin for Passport2013 {
+    fn to_latin(&self, src: &str) -> String {
+        self.translit.to_latin(src)
+    }
+}
+
+/// Cyrillic Russian transliteration table for driver license.
+///
+pub struct OrderN995 {
+    translit: Transliterator,
+}
+
+impl OrderN995 {
+    pub fn new() -> Self {
+        let translit = Transliterator::new(order_n_995::order_n_995_ru());
+
+        OrderN995 { translit }
+    }
+}
+
+impl ToLatin for OrderN995 {
     fn to_latin(&self, src: &str) -> String {
         self.translit.to_latin(src)
     }
