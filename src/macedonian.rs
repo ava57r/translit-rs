@@ -7,7 +7,7 @@ use super::CharsMapping;
 ///
 /// Attention: Converting back from romanized cyrillic to cyrillic is ambiguous, thus not supported
 pub fn digraph_system() -> CharsMapping {
-    [
+    vec![
         ("А", "A"),
         ("Б", "B"),
         ("В", "V"),
@@ -71,7 +71,4 @@ pub fn digraph_system() -> CharsMapping {
         ("џ", "dj"),
         ("ш", "sh"),
     ]
-    .iter()
-    .cloned()
-    .collect()
 }

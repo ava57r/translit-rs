@@ -8,7 +8,7 @@ use super::CharsMapping;
 /// Attention! Transliteration from Latin alphabet to Cyrillic text not supported.
 /// In transliteration from the Cyrillic to the Latin alphabet excludes the letter `ь`.
 pub fn iternational_passport_2013_ru() -> CharsMapping {
-    [
+    vec![
         ("А", "A"),
         ("Б", "B"),
         ("В", "V"),
@@ -77,7 +77,4 @@ pub fn iternational_passport_2013_ru() -> CharsMapping {
         ("я", "ia"),
         ("№", "#"),
     ]
-    .iter()
-    .cloned()
-    .collect()
 }
