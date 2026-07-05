@@ -18,6 +18,7 @@ exclude = [
 ]
 
 [dependencies]
+aho-corasick = "1.1"
 
 
 [[example]]
