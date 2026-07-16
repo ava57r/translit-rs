@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.8.0 (2026-07-16)
+
+* port to 2024 edition
+
 ## 0.7.0 (2026-07-16)
 
 * speed up transliteration
