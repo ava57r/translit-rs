@@ -1,5 +1,13 @@
 # CHANGES
 
+## 0.7.0 (2026-07-16)
+
+* speed up transliteration
+
+## 0.6.0 (20-06-14)
+
+* add Cyrillic Russian transliteration table for driver license
+
 ## 0.5.0 (2019-06-14)
 
 **Breaking changes**
