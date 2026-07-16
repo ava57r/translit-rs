@@ -5,7 +5,7 @@ use super::CharsMapping;
 /// more details:
 /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
 pub fn gost779b_ru() -> CharsMapping {
-    [
+    vec![
         ("А", "A"),
         ("Б", "B"),
         ("В", "V"),
@@ -72,9 +72,6 @@ pub fn gost779b_ru() -> CharsMapping {
         ("я", "ya"),
         ("№", "#"),
     ]
-    .iter()
-    .cloned()
-    .collect()
 }
 
 /// Cyrillic Belarusian transliteration table.
@@ -82,7 +79,7 @@ pub fn gost779b_ru() -> CharsMapping {
 /// more details:
 /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
 pub fn gost779b_by() -> CharsMapping {
-    [
+    vec![
         ("А", "A"),
         ("Б", "B"),
         ("В", "V"),
@@ -148,9 +145,6 @@ pub fn gost779b_by() -> CharsMapping {
         ("ў", "u`"),
         ("№", "#"),
     ]
-    .iter()
-    .cloned()
-    .collect()
 }
 
 /// Cyrillic Ukrainian transliteration table.
@@ -158,7 +152,7 @@ pub fn gost779b_by() -> CharsMapping {
 /// more details:
 /// [http://en.wikipedia.org/wiki/ISO_9](http://en.wikipedia.org/wiki/ISO_9)
 pub fn gost779b_ua() -> CharsMapping {
-    [
+    vec![
         ("А", "A"),
         ("Б", "B"),
         ("В", "V"),
@@ -226,7 +220,4 @@ pub fn gost779b_ua() -> CharsMapping {
         ("ї", "yi"),
         ("№", "#"),
     ]
-    .iter()
-    .cloned()
-    .collect()
 }

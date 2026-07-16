@@ -1,3 +1,5 @@
+use aho_corasick::AhoCorasick;
+
 use super::CharsMapping;
 
 use std::cmp::Ordering;
@@ -30,7 +32,10 @@ pub enum Language {
 /// and back.
 ///
 pub struct Transliterator {
-    rules: CharsMapping,
+    to_latin_matcher: AhoCorasick,
+    to_latin_replacements: Vec<&'static str>,
+    from_latin_matcher: AhoCorasick,
+    from_latin_replacements: Vec<&'static str>,
 }
 
 impl Transliterator {
@@ -70,26 +75,29 @@ impl Transliterator {
         // sort by Latin string
         table.sort_by(|a, b| compare_len(b.1, a.1));
 
-        Self { rules: table }
+        Self {
+            to_latin_matcher: AhoCorasick::builder()
+                .match_kind(aho_corasick::MatchKind::LeftmostFirst)
+                .build(table.iter().map(|(p, _r)| p))
+                .expect("Rules exceeded aho-corasick limits"),
+            to_latin_replacements: table.iter().map(|(_p, r)| *r).collect(),
+            from_latin_matcher: AhoCorasick::builder()
+                .match_kind(aho_corasick::MatchKind::LeftmostFirst)
+                .build(table.iter().map(|(_p, r)| r))
+                .expect("Rules exceeded aho-corasick limits"),
+            from_latin_replacements: table.iter().map(|(p, _r)| *p).collect(),
+        }
     }
 
     /// Transliterate input string.
     pub fn convert(&self, src: &str, invert: bool) -> String {
-        let mut input = src.to_owned();
-
-        for elem in self.rules.iter() {
-            let (source_char, translit_char) = (elem.0, elem.1);
-
-            input = {
-                if invert {
-                    input.replace(translit_char, source_char)
-                } else {
-                    input.replace(source_char, translit_char)
-                }
-            }
+        if invert {
+            self.from_latin_matcher
+                .replace_all(src, &self.from_latin_replacements)
+        } else {
+            self.to_latin_matcher
+                .replace_all(src, &self.to_latin_replacements)
         }
-
-        input
     }
 }
 

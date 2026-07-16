@@ -7,7 +7,7 @@ use super::CharsMapping;
 ///
 /// Attention: Converting back from romanized cyrillic to cyrillic is ambiguous, thus not supported
 pub fn streamlined_system() -> CharsMapping {
-    [
+    vec![
         ("А", "A"),
         ("Б", "B"),
         ("В", "V"),
@@ -70,7 +70,4 @@ pub fn streamlined_system() -> CharsMapping {
         ("я", "ya"),
         ("№", "#"),
     ]
-    .iter()
-    .cloned()
-    .collect()
 }
